@@ -2,14 +2,11 @@ import R from "ramda";
 import { employees, Employee, EmployeeTransform } from "./employees";
 
 type GroupResult<T> = { keys: string[]; values: { [index: string]: T[] } };
-const groupBy = <T>(list: ReadonlyArray<T>, fn: (a: T) => string): GroupResult<T> => {
-  const groupedResult = R.groupBy(fn, list);
-  return { keys: Object.keys(groupedResult), values: groupedResult };
-};
+const groupBy = <T>(list: ReadonlyArray<T>, fn: (a: T) => string): GroupResult<T> =>
+  (groupedResult => ({ keys: Object.keys(groupedResult), values: groupedResult }))(R.groupBy(fn, list));
 
-const getQuarter = (date: Date) => {
-  return Math.floor((date.getMonth() + 3) / 3);
-};
+const getQuarter = (date: Date) => Math.floor((date.getMonth() + 3) / 3);
+
 const getRole = (e: Employee) =>
   e.grade === "Consultant - Graduate" ? "twu" : e.department === "Professional Services" ? "laterals" : "ops";
 
