@@ -29,7 +29,8 @@ const getActuals = (byQuarter: GroupResult<EmployeeTransform>) =>
   byQuarter.keys.reduce((o, quarter) => ({ ...o, [quarter]: getRoles(groupBy(byQuarter.values[quarter], e => e.role)) }), {
     q1: {},
     q2: {},
-    q3: {}
+    q3: {},
+    q4: {}
   });
 
 const getRoles = (byRole: GroupResult<EmployeeTransform>) =>
